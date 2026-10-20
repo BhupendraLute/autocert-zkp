@@ -11,7 +11,7 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 
 | # | Feature | Phase | Status |
 |---|---------|-------|--------|
-| 1 | Stack Foundation & Scaffolding | Foundation | planned |
+| 1 | Stack Foundation & Scaffolding | Foundation | done |
 | 2 | Circom ZK Circuit & Cryptographic Ceremony | Foundation | planned |
 | 3 | Supabase Ledger & Merkle Root Registry | Foundation | planned |
 | 4 | OpenCode Zen AI Parser & W3C Credential Schema | Slice 1 | planned |
@@ -23,16 +23,15 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 
 ## Foundations
 
-### 1. Stack Foundation & Scaffolding · needs a decision
+### 1. Stack Foundation & Scaffolding · done
 Scaffold the latest Next.js 16 (16.4+) App Router application with React 19 using CLI commands, configure WebAssembly/Web Worker compilation, and install core cryptographic, AI SDK, and styling packages.
 **Done when:** `create-next-app@latest` initializes Next.js 16.4+ via terminal, `next.config.ts` supports WASM/workers, all core dependencies (including Vercel AI SDK) are installed, and `npm run dev` boots cleanly.
-- [ ] Decide the setup (spec): `/architect stack foundation`
-- [ ] Scaffold via CLI: `/develop scaffold`
-   - [ ] Run `npx create-next-app@latest` in terminal with non-interactive flags (Next.js 16.4+, React 19)
-   - [ ] Install `snarkjs`, `circomlibjs`, `lucide-react`, `clsx`, `tailwind-merge`, `@supabase/supabase-js`, `qrcode`, `ai`, `@ai-sdk/openai`, `zod`
-   - [ ] Configure `next.config.ts` for WebAssembly and Web Worker support
-- [ ] Check dev server boots clean: `/test`
-Spec 0001 · code in `./`
+- [x] Scaffold via CLI: `/develop scaffold`
+   - [x] Run `npx create-next-app@latest` in terminal with non-interactive flags (Next.js 16.4+, React 19)
+   - [x] Install `snarkjs`, `circomlibjs`, `lucide-react`, `clsx`, `tailwind-merge`, `@supabase/supabase-js`, `qrcode`, `ai`, `@ai-sdk/openai`, `zod`
+   - [x] Configure `next.config.ts` for WebAssembly and Web Worker support
+- [x] Check dev server & production build runs clean: `/test`
+code in `./`
 
 ### 2. Circom ZK Circuit & Cryptographic Ceremony · needs a decision
 Author arithmetic circuit `academic_verifier.circom`, execute bn128 Powers of Tau ceremony, compile to R1CS/WASM, and export Groth16 zkey and verification key.
