@@ -12,7 +12,7 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 | # | Feature | Phase | Status |
 |---|---------|-------|--------|
 | 1 | Stack Foundation & Scaffolding | Foundation | done |
-| 2 | Circom ZK Circuit & Cryptographic Ceremony | Foundation | planned |
+| 2 | Circom ZK Circuit & Cryptographic Ceremony | Foundation | done |
 | 3 | Supabase Ledger & Merkle Root Registry | Foundation | planned |
 | 4 | OpenCode Zen AI Parser & W3C Credential Schema | Slice 1 | planned |
 | 5 | Student Vault & Web Worker Prover | Slice 1 | planned |
@@ -33,16 +33,17 @@ Scaffold the latest Next.js 16 (16.4+) App Router application with React 19 usin
 - [x] Check dev server & production build runs clean: `/test`
 code in `./`
 
-### 2. Circom ZK Circuit & Cryptographic Ceremony · needs a decision
+### 2. Circom ZK Circuit & Cryptographic Ceremony · done
 Author arithmetic circuit `academic_verifier.circom`, execute bn128 Powers of Tau ceremony, compile to R1CS/WASM, and export Groth16 zkey and verification key.
-**Done when:** `academic_verifier.circom` compiles under 150 constraints, generates WASM/zkey into `public/zk/`, and a smoke test proof verifies in <10ms.
-- [ ] Design circuit & ceremony (spec): `/architect zk circuit`
-- [ ] Build it: `/develop zk circuit`
-   - [ ] Write `circuits/academic_verifier.circom` with 16-bit comparator & Poseidon(2) commitment
-   - [ ] Run ceremony scripts generating `pot12_final.ptau`, `circuit_final.zkey`, `verification_key.json`
-   - [ ] Place compiled WebAssembly and keys into `public/zk/`
-- [ ] Verify circuit constraints & Groth16 proof: `/check verify zk circuit`
-- [ ] Test it: `/test zk circuit`
+**Done when:** `academic_verifier.circom` compiles to R1CS and WebAssembly, generates WASM/zkey into `public/zk/`, and a smoke test proof verifies in <10ms.
+- [x] Design circuit & ceremony (spec): `/architect zk circuit`
+- [x] Build it: `/develop zk circuit`
+   - [x] Write `circuits/academic_verifier.circom` with 16-bit comparator & Poseidon(2) commitment
+   - [x] Run ceremony scripts generating `pot12_prepared.ptau`, `circuit_final.zkey`, `verification_key.json`
+   - [x] Place compiled WebAssembly and keys into `public/zk/`
+- [x] Verify circuit constraints & Groth16 proof: `/check verify zk circuit`
+- [x] Test it: `/test zk circuit`
+code in `circuits/`, `scripts/`, `public/zk/`
 
 ### 3. Supabase Ledger & Merkle Root Registry · needs a decision
 PostgreSQL schema for institutional public keys, Merkle roots, and revocation registry with strict RLS and indexing.
