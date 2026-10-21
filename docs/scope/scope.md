@@ -13,7 +13,7 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 |---|---------|-------|--------|
 | 1 | Stack Foundation & Scaffolding | Foundation | done |
 | 2 | Circom ZK Circuit & Cryptographic Ceremony | Foundation | done |
-| 3 | Supabase Ledger & Merkle Root Registry | Foundation | planned |
+| 3 | Supabase Ledger & Merkle Root Registry | Foundation | done |
 | 4 | OpenCode Zen AI Parser & W3C Credential Schema | Slice 1 | planned |
 | 5 | Student Vault & Web Worker Prover | Slice 1 | planned |
 | 6 | Public Verifier Portal & Sub-10ms Engine | Slice 2 | planned |
@@ -45,16 +45,17 @@ Author arithmetic circuit `academic_verifier.circom`, execute bn128 Powers of Ta
 - [x] Test it: `/test zk circuit`
 code in `circuits/`, `scripts/`, `public/zk/`
 
-### 3. Supabase Ledger & Merkle Root Registry · needs a decision
+### 3. Supabase Ledger & Merkle Root Registry · done
 PostgreSQL schema for institutional public keys, Merkle roots, and revocation registry with strict RLS and indexing.
 **Done when:** Supabase tables (`institutions`, `merkle_roots`, `revocations`) exist with RLS policies, and server actions can query roots without leaks.
-- [ ] Design schema & security policies (spec): `/architect supabase ledger`
-- [ ] Build it: `/develop supabase ledger`
-   - [ ] Draft and apply migration for institutions, roots, and revocation tables
-   - [ ] Configure Supabase client in `lib/supabase/` with server/client boundaries
-   - [ ] Implement query utilities for root validation and revocation check
-- [ ] Verify RLS & queries: `/check verify supabase ledger`
-- [ ] Test it: `/test supabase ledger`
+- [x] Design schema & security policies (spec): `/architect supabase ledger`
+- [x] Build it: `/develop supabase ledger`
+   - [x] Draft and apply migration for institutions, roots, and revocation tables
+   - [x] Configure Supabase client in `src/lib/supabase/` with server/client boundaries
+   - [x] Implement query utilities for root validation and revocation check
+- [x] Verify RLS & queries: `/check verify supabase ledger`
+- [x] Test it: `/test supabase ledger`
+code in `supabase/migrations/`, `src/lib/supabase/`, `src/lib/types/`, `scripts/test-ledger.ts`
 
 ---
 
