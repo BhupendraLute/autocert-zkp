@@ -6,9 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint src/",
     "zk:setup": "node scripts/setup-zk.js",
-    "zk:test": "node scripts/test-circuit.js"
+    "zk:test": "node scripts/test-circuit.js",
+    "ledger:test": "tsx scripts/test-ledger.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.98",
@@ -38,6 +39,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }
