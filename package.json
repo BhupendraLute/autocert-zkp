@@ -6,12 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "zk:setup": "node scripts/setup-zk.js",
+    "zk:test": "node scripts/test-circuit.js"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.98",
     "@supabase/supabase-js": "^2.118.0",
     "ai": "^7.0.146",
+    "circomlib": "^2.0.5",
     "circomlibjs": "^0.1.7",
     "clsx": "^2.1.1",
     "lucide-react": "^1.60.0",

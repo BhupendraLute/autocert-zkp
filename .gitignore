@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+Thumbs.db
 
 # debug
 npm-debug.log*
@@ -40,3 +41,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local toolchains & compiler binaries
+/tools/
+
+# zero-knowledge ceremony & intermediate compilation artifacts
+# (Final proving key .zkey, .wasm, and verification_key.json are tracked for browser runtime)
+*.ptau
+public/zk/*.r1cs
+public/zk/*.sym
+public/zk/*_0000.zkey
