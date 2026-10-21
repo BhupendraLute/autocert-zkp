@@ -14,7 +14,7 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 | 1 | Stack Foundation & Scaffolding | Foundation | done |
 | 2 | Circom ZK Circuit & Cryptographic Ceremony | Foundation | done |
 | 3 | Supabase Ledger & Merkle Root Registry | Foundation | done |
-| 4 | OpenCode Zen AI Parser & W3C Credential Schema | Slice 1 | planned |
+| 4 | OpenCode Zen AI Parser & W3C Credential Schema | Slice 1 | done |
 | 5 | Student Vault & Web Worker Prover | Slice 1 | planned |
 | 6 | Public Verifier Portal & Sub-10ms Engine | Slice 2 | planned |
 | 7 | Benchmarking Suite & Avishkar Deliverables | Slice 2 | planned |
@@ -61,17 +61,19 @@ code in `supabase/migrations/`, `src/lib/supabase/`, `src/lib/types/`, `scripts/
 
 ## Slice 1: Credential Issuance & Client-Side Prover
 
-### 4. Vercel AI SDK & OpenCode Zen Credential Ingestion Agent · needs a decision
-Ingest unstructured university grade cards into standardized W3C JSON-LD credential schemas using Vercel AI SDK (`generateObject`) connected to OpenCode Zen (`opencode/big-pickle`), with interactive AI audit support via `ai-elements` and `streamdown`.
+### 4. Vercel AI SDK & OpenCode Zen Credential Ingestion Agent · done
+Ingest unstructured university grade cards into standardized W3C JSON-LD credential schemas using Vercel AI SDK (`generateText` + `Output.object`) connected to OpenCode Zen (`opencode/big-pickle`), with interactive AI audit support and resilient heuristic parsing.
 **Done when:** Raw marksheet text is parsed via Vercel AI SDK into a strictly validated Zod W3C JSON-LD schema with scaled integer CGPA and client-side Poseidon commitment.
-- [ ] Design AI agent & VC schema (spec): `/architect ai parser`
-- [ ] Build it: `/develop ai parser`
-   - [ ] Configure OpenCode Zen provider with Vercel AI SDK (`createOpenAI` with custom baseURL)
-   - [ ] Define Zod schemas and TypeScript types in `lib/types/credential.ts`
-   - [ ] Implement Server Action `app/actions/parse-credential.ts` using `generateObject`
-   - [ ] Build client-side Poseidon hashing & blinding salt generator in `lib/crypto/`
-- [ ] Verify schema extraction accuracy: `/check verify ai parser`
-- [ ] Test it: `/test ai parser`
+- [x] Design AI agent & VC schema (spec): `/architect ai parser`
+- [x] Build it: `/develop ai parser`
+   - [x] Configure OpenCode Zen provider with Vercel AI SDK (`createOpenAI` with custom baseURL)
+   - [x] Define Zod schemas and TypeScript types in `src/lib/types/credential.ts`
+   - [x] Implement Server Action `src/app/actions/parse-credential.ts` using `generateText` with `Output.object`
+   - [x] Build client-side Poseidon hashing & blinding salt generator in `src/lib/crypto/poseidon.ts`
+   - [x] Create Authority Ingestion & Audit Portal at `src/app/issue/page.tsx`
+- [x] Verify schema extraction accuracy: `/check verify ai parser`
+- [x] Test it: `/test ai parser`
+code in `src/lib/types/`, `src/lib/crypto/`, `src/lib/ai/`, `src/app/actions/`, `src/app/issue/`, `scripts/test-credential-ingestion.ts`
 
 ### 5. Student Vault & Web Worker Prover · needs a decision
 Client-side zero-knowledge prover UI executing inside a dedicated Web Worker to generate Groth16 zk-SNARK proofs in under 1.2s on mobile devices.
