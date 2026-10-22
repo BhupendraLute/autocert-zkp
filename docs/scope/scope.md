@@ -15,7 +15,7 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 | 2 | Circom ZK Circuit & Cryptographic Ceremony | Foundation | done |
 | 3 | Supabase Ledger & Merkle Root Registry | Foundation | done |
 | 4 | OpenCode Zen AI Parser & W3C Credential Schema | Slice 1 | done |
-| 5 | Student Vault & Web Worker Prover | Slice 1 | planned |
+| 5 | Student Vault & Web Worker Prover | Slice 1 | done |
 | 6 | Public Verifier Portal & Sub-10ms Engine | Slice 2 | planned |
 | 7 | Benchmarking Suite & Avishkar Deliverables | Slice 2 | planned |
 
@@ -75,16 +75,17 @@ Ingest unstructured university grade cards into standardized W3C JSON-LD credent
 - [x] Test it: `/test ai parser`
 code in `src/lib/types/`, `src/lib/crypto/`, `src/lib/ai/`, `src/app/actions/`, `src/app/issue/`, `scripts/test-credential-ingestion.ts`
 
-### 5. Student Vault & Web Worker Prover · needs a decision
+### 5. Student Vault & Web Worker Prover · done
 Client-side zero-knowledge prover UI executing inside a dedicated Web Worker to generate Groth16 zk-SNARK proofs in under 1.2s on mobile devices.
 **Done when:** Student can enter a threshold, see live witness telemetry, generate a 384B Groth16 proof via WASM Worker without UI lag, and generate a dynamic QR / shareable URL.
-- [ ] Design student vault UI & worker (spec): `/architect student vault`
-- [ ] Build it: `/develop student vault`
-   - [ ] Implement `workers/zk-prover.worker.ts` for off-thread `snarkjs.groth16.fullProve`
-   - [ ] Build `app/student/page.tsx` adhering to `design-taste-frontend`
-   - [ ] Add dynamic QR code generator (`qrcode.react`) and Base64 URL payload generator
-- [ ] Verify proof generation latency & UI responsiveness: `/check verify student vault`
-- [ ] Test it: `/test student vault`
+- [x] Design student vault UI & worker (spec): `/architect student vault`
+- [x] Build it: `/develop student vault`
+   - [x] Implement `public/workers/zk-prover.worker.js` & `src/workers/zk-prover.worker.ts` for off-thread `snarkjs.groth16.fullProve`
+   - [x] Build `app/student/page.tsx` adhering to `design-taste-frontend`
+   - [x] Add dynamic QR code generator (`qrcode.react`) and Base64 URL payload generator
+- [x] Verify proof generation latency & UI responsiveness: `/check verify student vault`
+- [x] Test it: `/test student vault`
+code in `src/app/student/`, `public/workers/`, `src/workers/`, `src/lib/zk/`, `scripts/test-student-prover.ts`
 
 ---
 
