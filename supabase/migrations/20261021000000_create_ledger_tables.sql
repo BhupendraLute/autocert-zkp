@@ -100,3 +100,20 @@ VALUES (
     'BATCH-2026-BTECH-CSE-FINAL',
     'Registrar RTMNU Cryptographic Office'
 ) ON CONFLICT (institution_id, root_hash) DO NOTHING;
+
+-- Initial Revocations for demo
+INSERT INTO revocations (id, commitment_hash, reason, revoked_at)
+VALUES 
+(
+    'c2eedd11-2e2d-5ff0-dd8f-8dd1df502c33',
+    '999999999999999999999999999999',
+    'Academic credential revoked due to record revision',
+    '2026-02-01T00:00:00Z'
+),
+(
+    'd3ffee22-3f3e-6001-ee90-9ee2e0613d44',
+    '11792700784369162271458023948725715768482259903023295550466684013241410379466',
+    'Credential revoked: Disciplinary council resolution #2026/D-41',
+    '2026-03-01T00:00:00Z'
+) ON CONFLICT (commitment_hash) DO NOTHING;
+

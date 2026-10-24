@@ -49,6 +49,12 @@ const MOCK_REVOCATIONS: Revocation[] = [
     reason: 'Academic credential revoked due to record revision',
     revoked_at: new Date('2026-02-01T00:00:00Z').toISOString(),
   },
+  {
+    id: 'd3ffee22-3f3e-6001-ee90-9ee2e0613d44',
+    commitment_hash: '11792700784369162271458023948725715768482259903023295550466684013241410379466',
+    reason: 'Credential revoked: Disciplinary council resolution #2026/D-41',
+    revoked_at: new Date('2026-03-01T00:00:00Z').toISOString(),
+  },
 ];
 
 /**
@@ -414,3 +420,80 @@ export async function deleteRevocation(id: string): Promise<void> {
     MOCK_REVOCATIONS.splice(index, 1);
   }
 }
+
+/**
+ * Seeds demonstration records (institutions, Merkle roots, and revocations)
+ * into a configured live Supabase ledger.
+ * Inserts records only when absent without updating existing conflicting records,
+ * preserving generated IDs, public keys, and audit details.
+ */
+export async function seedLiveLedger(): Promise<{ success: boolean; message: string }> {
+  checkBackendConsistency('write');
+  const admin = getSupabaseAdminClient();
+  if (!admin) {
+    return { success: false, message: 'Supabase admin client unconfigured (mock active).' };
+  }
+
+  // 1. Insert demo institutions only when absent
+  for (const inst of MOCK_INSTITUTIONS) {
+    const { error } = await admin
+      .from('institutions')
+      .upsert(inst, { onConflict: 'code', ignoreDuplicates: true });
+    if (error) throw new Error(`Failed to seed institution: ${error.message}`);
+  }
+
+  // 2. Resolve live institution IDs to preserve existing database UUIDs and audit details
+  const mockCodes = MOCK_INSTITUTIONS.map((i) => i.code);
+  const { data: liveInstitutions, error: instLookupError } = await admin
+    .from('institutions')
+    .select('id, code')
+    .in('code', mockCodes);
+
+  if (instLookupError) {
+    throw new Error(`Failed to resolve live institution IDs: ${instLookupError.message}`);
+  }
+
+  if (!liveInstitutions || liveInstitutions.length === 0) {
+    throw new Error('Failed to resolve live institution IDs: No matching seeded institutions found.');
+  }
+
+  const instIdMap = new Map<string, string>();
+  for (const liveInst of liveInstitutions) {
+    instIdMap.set(liveInst.code.toUpperCase(), liveInst.id);
+  }
+
+  // 3. Insert demo Merkle roots with resolved live institution IDs only when absent
+  for (const root of MOCK_MERKLE_ROOTS) {
+    const mockInst = MOCK_INSTITUTIONS.find((i) => i.id === root.institution_id);
+    if (!mockInst) {
+      throw new Error(`Cannot seed Merkle root: Unknown mock institution ID '${root.institution_id}'.`);
+    }
+    const instCode = mockInst.code.toUpperCase();
+    const resolvedInstId = instIdMap.get(instCode);
+
+    if (!resolvedInstId) {
+      throw new Error(`Cannot seed Merkle root: Matching live institution not found for code '${instCode}'.`);
+    }
+
+    const rootToInsert = {
+      ...root,
+      institution_id: resolvedInstId,
+    };
+
+    const { error } = await admin
+      .from('merkle_roots')
+      .upsert(rootToInsert, { onConflict: 'institution_id, root_hash', ignoreDuplicates: true });
+    if (error) throw new Error(`Failed to seed Merkle root: ${error.message}`);
+  }
+
+  // 4. Insert demo revocations only when absent
+  for (const rev of MOCK_REVOCATIONS) {
+    const { error } = await admin
+      .from('revocations')
+      .upsert(rev, { onConflict: 'commitment_hash', ignoreDuplicates: true });
+    if (error) throw new Error(`Failed to seed revocation: ${error.message}`);
+  }
+
+  return { success: true, message: 'Live Supabase ledger seeded successfully.' };
+}
+
