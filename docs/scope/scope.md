@@ -16,7 +16,7 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 | 3 | Supabase Ledger & Merkle Root Registry | Foundation | done |
 | 4 | OpenCode Zen AI Parser & W3C Credential Schema | Slice 1 | done |
 | 5 | Student Vault & Web Worker Prover | Slice 1 | done |
-| 6 | Public Verifier Portal & Sub-10ms Engine | Slice 2 | planned |
+| 6 | Public Verifier Portal & Sub-10ms Engine | Slice 2 | done |
 | 7 | Benchmarking Suite & Avishkar Deliverables | Slice 2 | planned |
 
 ---
@@ -91,16 +91,17 @@ code in `src/app/student/`, `public/workers/`, `src/workers/`, `src/lib/zk/`, `s
 
 ## Slice 2: Verification Engine & Avishkar Deliverables
 
-### 6. Public Verifier Portal & Sub-10ms Engine · needs a decision
+### 6. Public Verifier Portal & Sub-10ms Engine · done
 Instant edge verification portal decoding Base64 Groth16 payloads, validating pairings against `verification_key.json`, and checking registry roots in <10ms.
 **Done when:** Opening `/verify?data=<token>` or scanning QR parses public signals, executes `snarkjs.groth16.verify`, and renders a verified badge with 0% PII revealed.
-- [ ] Design verifier portal (spec): `/architect verifier portal`
-- [ ] Build it: `/develop verifier portal`
-   - [ ] Build `app/verify/page.tsx` with dynamic payload decoder and camera QR scanner fallback
-   - [ ] Wire Groth16 pairing check and Supabase root verification
-   - [ ] Implement tamper detection alerts and cryptographic authenticity certificate card
-- [ ] Verify pairing check speed and invalid proof rejection: `/check verify verifier portal`
-- [ ] Test it: `/test verifier portal`
+- [x] Design verifier portal (spec): `/architect verifier portal`
+- [x] Build it: `/develop verifier portal`
+   - [x] Build `app/verify/page.tsx` with dynamic payload decoder and camera QR scanner fallback
+   - [x] Wire Groth16 pairing check and Supabase root verification
+   - [x] Implement tamper detection alerts and cryptographic authenticity certificate card
+- [x] Verify pairing check speed and invalid proof rejection: `/check verify verifier portal`
+- [x] Test it: `/test verifier portal`
+code in `src/app/verify/`, `src/lib/zk/`, `src/lib/types/verifier.ts`, `src/lib/data/mock-proofs.ts`, `scripts/test-verifier.ts`
 
 ### 7. Benchmarking Suite & Avishkar Deliverables · needs a decision
 Automated empirical benchmarking across simulated device profiles and generation of Avishkar 2026-27 presentation artifacts (poster figures, tables, demo script).

@@ -71,6 +71,11 @@ async function runLedgerSmokeTest() {
   assert(revokedResult.isRevoked === true, 'Revoked commitment accurately flagged as revoked');
   assert(Boolean(revokedResult.record?.reason), 'Revocation record provides reason');
 
+  const presetRevokedCommitment = '11792700784369162271458023948725715768482259903023295550466684013241410379466';
+  const presetRevokedResult = await checkRevocation(presetRevokedCommitment);
+  assert(presetRevokedResult.isRevoked === true, 'Preset revoked credential accurately flagged as revoked');
+  assert(Boolean(presetRevokedResult.record?.reason), 'Preset revocation record provides reason');
+
   // 4. Full verifier pipeline (with distinct commitmentHash and rootHash)
   console.log('\n--- 4. Testing End-to-End Verifier Pipeline ---');
   const pipelineValid = await verifyCredentialLedgerState(nonRevokedCommitment, registeredRoot);
