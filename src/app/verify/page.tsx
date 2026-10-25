@@ -1,59 +1,15 @@
-'use client';
-
 import React, { Suspense } from 'react';
 import { Loader2 } from 'lucide-react';
-import { useVerifier } from './hooks/useVerifier';
-import { VerifierHeader } from './components/VerifierHeader';
-import { VerifierIntake } from './components/VerifierIntake';
-import { VerificationCertificate } from './components/VerificationCertificate';
-import { CryptographicInspector } from './components/CryptographicInspector';
+import { VerifierClient } from './components/VerifierClient';
 
-function VerifierContent() {
-  const {
-    activeTab,
-    setActiveTab,
-    selectedPresetId,
-    activeToken,
-    currentPayloadSource,
-    verificationResult,
-    isVerifying,
-    isInspectorOpen,
-    setIsInspectorOpen,
-    handleVerifyToken,
-    handleVerifyJson,
-    handleSelectPreset,
-  } = useVerifier();
+export const metadata = {
+  title: 'Public Verifier Portal | AutoCert-ZKP',
+  description:
+    'Sub-10ms Edge & Client-Side Groth16 zk-SNARK Verification over Curve BN128 with Zero-Knowledge Redaction.',
+};
 
-  return (
-    <div className="space-y-8">
-      <VerifierHeader />
-
-      <VerifierIntake
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        selectedPresetId={selectedPresetId}
-        onSelectPreset={handleSelectPreset}
-        onVerifyToken={handleVerifyToken}
-        onVerifyJson={handleVerifyJson}
-        isVerifying={isVerifying}
-        currentPayloadSource={currentPayloadSource}
-      />
-
-      <VerificationCertificate
-        result={verificationResult}
-        isVerifying={isVerifying}
-        onOpenInspector={() => setIsInspectorOpen(true)}
-        activeToken={activeToken}
-      />
-
-      <CryptographicInspector
-        result={verificationResult}
-        isOpen={isInspectorOpen}
-        onClose={() => setIsInspectorOpen(false)}
-      />
-    </div>
-  );
-}
+// Opt this segment out of instant navigation validation because it consumes dynamic URL search params (?data=...)
+export const instant = false;
 
 function VerifierLoadingSkeleton() {
   return (
@@ -71,7 +27,7 @@ export default function VerifierPage() {
     <main className="min-h-screen bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8 font-sans selection:bg-cyan-500/30">
       <div className="max-w-5xl mx-auto">
         <Suspense fallback={<VerifierLoadingSkeleton />}>
-          <VerifierContent />
+          <VerifierClient />
         </Suspense>
       </div>
     </main>

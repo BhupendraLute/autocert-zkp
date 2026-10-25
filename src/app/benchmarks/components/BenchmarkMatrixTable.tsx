@@ -102,6 +102,9 @@ export function BenchmarkMatrixTable({ profiles = DEFAULT_PROFILES }: BenchmarkM
             tiers vs. traditional centralized marksheet verification.
           </p>
         </div>
+        <div className="sm:hidden inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-400/80 bg-slate-950/80 border border-slate-800 px-3 py-1.5 rounded-lg self-start">
+          <span>← Swipe table horizontally →</span>
+        </div>
       </div>
 
       <div className="overflow-x-auto">

@@ -6,17 +6,11 @@ Your job is to understand the request, use the installed engineering workflow sk
 
 <!-- BEGIN:nextjs-agent-rules -->
 
-# This is NOT the Next.js you know
+## This is NOT the Next.js you know
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from older training data. 
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
-**Official Bundled Documentation Notice (Next.js 16.2+):**
-From Next.js 16.2 and later, the Next.js local development environment officially contains version-matched documentation bundled directly inside the project at:
-`node_modules/next/dist/docs/` (resolved from this project directory).
-
-Always read the relevant guide in `node_modules/next/dist/docs/` before writing Next.js code. Heed deprecation notices, Server Component vs Client Component boundaries, Route Handlers, and Server Action conventions.
-
-This block is maintained to ensure version alignment — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Committing it with your work keeps the tree clean.
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
 
@@ -201,12 +195,17 @@ Circuit compilation pipeline:
 ```bash
 # Compile Circom to R1CS & WebAssembly
 circom circuits/academic_verifier.circom --r1cs --wasm --sym -o public/zk/
+cp public/zk/academic_verifier_js/academic_verifier.wasm public/zk/academic_verifier.wasm
 
 # Ceremony & Groth16 Setup (BN128 curve)
 npx snarkjs powersoftau new bn128 12 public/zk/pot12_0000.ptau -v
-npx snarkjs powersoftau contribute public/zk/pot12_0000.ptau public/zk/pot12_final.ptau --name="AutoCert Ceremony" -v -e="AutoCert2026AvishkarEntropy"
-npx snarkjs groth16 setup public/zk/academic_verifier.r1cs public/zk/pot12_final.ptau public/zk/circuit_final.zkey
-npx snarkjs zkey export verification_key public/zk/circuit_final.zkey public/zk/verification_key.json
+npx snarkjs powersoftau contribute public/zk/pot12_0000.ptau public/zk/pot12_0001.ptau --name="AutoCert Ceremony" -v
+npx snarkjs powersoftau prepare phase2 public/zk/pot12_0001.ptau public/zk/pot12_final.ptau -v
+npx snarkjs powersoftau verify public/zk/pot12_final.ptau
+npx snarkjs groth16 setup public/zk/academic_verifier.r1cs public/zk/pot12_final.ptau public/zk/circuit_0000.zkey
+npx snarkjs zkey contribute public/zk/circuit_0000.zkey public/zk/circuit_final.zkey --name="AutoCert Ceremony" -v
+npx snarkjs zkey verify public/zk/academic_verifier.r1cs public/zk/pot12_final.ptau public/zk/circuit_final.zkey
+npx snarkjs zkey export verificationkey public/zk/circuit_final.zkey public/zk/verification_key.json
 ```
 
 ---
