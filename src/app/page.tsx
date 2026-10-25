@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import {
-  ShieldCheck,
   Cpu,
   Lock,
   ArrowRight,
@@ -15,62 +14,8 @@ import {
 export default function Home() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-indigo-500/30 selection:text-indigo-200">
-      {/* Header */}
-      <header className="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-16 h-auto py-2.5 sm:py-3 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-emerald-400 p-0.5 shadow-lg shadow-indigo-500/20 shrink-0">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                <ShieldCheck className="w-5 h-5 text-indigo-400" />
-              </div>
-            </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="font-bold tracking-tight text-white text-sm sm:text-base truncate">
-                  AutoCert-ZKP
-                </span>
-                <span className="hidden sm:inline-flex text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
-                  Avishkar 2026-27
-                </span>
-              </div>
-              <p className="text-xs text-slate-400 hidden sm:block truncate">
-                Verifiable Academic Credential Ledger with Client-Side Zero-Knowledge Redaction
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2">
-            <Link
-              href="/issue"
-              className="hidden lg:flex items-center gap-1 text-xs text-slate-400 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-slate-800 transition-colors"
-            >
-              <span>Ingestion</span>
-            </Link>
-            <Link
-              href="/student"
-              className="text-xs font-medium text-slate-300 hover:text-white px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg hover:bg-slate-800 transition-colors"
-            >
-              <span>Student Vault</span>
-            </Link>
-            <Link
-              href="/verify"
-              className="text-xs font-medium text-slate-300 hover:text-white px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg hover:bg-slate-800 transition-colors"
-            >
-              <span>Public Verifier</span>
-            </Link>
-            <Link
-              href="/benchmarks"
-              className="text-xs font-semibold text-white bg-gradient-to-r from-indigo-600 to-emerald-500 hover:from-indigo-500 hover:to-emerald-400 px-2.5 py-1 sm:px-3.5 sm:py-2 rounded-xl shadow-md shadow-indigo-600/20 transition-all flex items-center gap-1.5"
-            >
-              <Award className="w-3.5 h-3.5" />
-              <span>Avishkar Hub</span>
-            </Link>
-          </div>
-        </div>
-      </header>
-
       {/* Hero Section */}
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex flex-col justify-center">
+      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full flex flex-col justify-center">
         <div className="text-center max-w-3xl mx-auto space-y-6">
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-indigo-400 bg-indigo-950/60 border border-indigo-800/40 px-3.5 py-1.5 rounded-full shadow-inner">
             <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
@@ -195,15 +140,14 @@ export default function Home() {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500/20 to-emerald-500/20 border border-indigo-500/30 text-indigo-300 flex items-center justify-center mb-4">
                 <Award className="w-5 h-5 text-emerald-400" />
               </div>
-              <h3 className="text-base font-bold text-white mb-1.5">4. Research Suite</h3>
+              <h3 className="text-base font-bold text-white mb-1.5">4. Benchmark Suite</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Quantitative benchmark tables, live browser profiler, presentation script, poster layout, and research
-                abstract for Avishkar 2026-27.
+                Empirical cross-device quantitative matrix, live client-side WebAssembly hardware profiler, and bilinear pairing verification metrics.
               </p>
             </div>
             <div className="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-medium">
               <Link href="/benchmarks" className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
-                <span>View Deliverables</span>
+                <span>View Benchmarks</span>
                 <ArrowRight className="w-3 h-3" />
               </Link>
               <span className="text-[10px] uppercase font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
@@ -247,22 +191,6 @@ export default function Home() {
           </div>
         </Link>
       </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© 2026 AutoCert-ZKP • Avishkar Research Convention (RTMNU, Engineering &amp; Technology UG)</p>
-          <div className="flex items-center gap-4">
-            <span className="text-slate-400">Groth16 BN128</span>
-            <span>•</span>
-            <span className="text-slate-400">Poseidon Hash</span>
-            <span>•</span>
-            <span className="text-slate-400">W3C VC Data Model</span>
-            <span>•</span>
-            <span className="text-slate-400">₹0 Cloud Compute</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

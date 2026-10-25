@@ -133,44 +133,6 @@ export default function IssueCredentialPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-indigo-500/30 selection:text-indigo-200">
-      {/* Top Navigation */}
-      <header className="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-emerald-400 p-0.5 shadow-lg shadow-indigo-500/20">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                <ShieldCheck className="w-5 h-5 text-indigo-400" />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold tracking-tight text-white text-base">AutoCert-ZKP</span>
-                <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                  Authority Portal
-                </span>
-              </div>
-              <p className="text-xs text-slate-400 hidden sm:block">
-                Rashtrasant Tukadoji Maharaj Nagpur University • Avishkar 2026-27
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="text-xs text-slate-400 hover:text-slate-200 transition-colors px-3 py-1.5 rounded-lg hover:bg-slate-800/50"
-            >
-              Overview
-            </Link>
-            <div className="h-4 w-px bg-slate-800" />
-            <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-medium bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Poseidon BN128 Ready
-            </span>
-          </div>
-        </div>
-      </header>
-
       {/* Main Container */}
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         {/* Header Title */}
@@ -504,7 +466,7 @@ export default function IssueCredentialPage() {
                         </p>
                       </div>
                       <Link
-                        href="/"
+                        href="/student"
                         className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 px-3.5 py-2 rounded-lg transition-colors shrink-0"
                       >
                         <span>Open Student Vault</span>
@@ -538,20 +500,6 @@ export default function IssueCredentialPage() {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-6 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© 2026 AutoCert-ZKP • Avishkar Research Convention (RTMNU, Engineering &amp; Technology UG)</p>
-          <div className="flex items-center gap-4">
-            <span className="text-slate-400">Zero-Knowledge Groth16 BN128</span>
-            <span>•</span>
-            <span className="text-slate-400">W3C JSON-LD</span>
-            <span>•</span>
-            <span className="text-slate-400">OpenCode Zen</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
