@@ -83,7 +83,7 @@ export function Navbar() {
         </nav>
 
         {/* Tablet Navigation (compact label) */}
-        <nav className="hidden md:flex xl:hidden items-center space-x-1">
+        <nav className="hidden lg:flex xl:hidden items-center space-x-1">
           {links.map((link) => {
             const Icon = link.icon;
             const isActive = pathname === link.href;
@@ -119,7 +119,7 @@ export function Navbar() {
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-label="Toggle Navigation Menu"
-            className="md:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+            className="lg:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
           >
             {mobileMenuOpen ? <X className="w-5 h-5 text-indigo-400" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -128,7 +128,7 @@ export function Navbar() {
 
       {/* Mobile Drawer Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-800/90 bg-slate-950/95 backdrop-blur-xl px-4 py-4 space-y-2 shadow-2xl animate-in slide-in-from-top-2 duration-200 max-h-[calc(100dvh-4rem)] overflow-y-auto">
+        <div className="lg:hidden border-t border-slate-800/90 bg-slate-950/95 backdrop-blur-xl px-4 py-4 space-y-2 shadow-2xl animate-in slide-in-from-top-2 duration-200 max-h-[calc(100dvh-4rem)] overflow-y-auto">
           <div className="flex items-center justify-between px-2 py-1 mb-2 text-[11px] font-mono text-slate-400 border-b border-slate-900 pb-2">
             <span>Avishkar 2026-27 Navigation</span>
             <span className="text-emerald-400 font-semibold">₹0 Gas BN128</span>

@@ -201,8 +201,10 @@ cp public/zk/academic_verifier_js/academic_verifier.wasm public/zk/academic_veri
 npx snarkjs powersoftau new bn128 12 public/zk/pot12_0000.ptau -v
 npx snarkjs powersoftau contribute public/zk/pot12_0000.ptau public/zk/pot12_0001.ptau --name="AutoCert Ceremony" -v
 npx snarkjs powersoftau prepare phase2 public/zk/pot12_0001.ptau public/zk/pot12_final.ptau -v
+npx snarkjs powersoftau verify public/zk/pot12_final.ptau
 npx snarkjs groth16 setup public/zk/academic_verifier.r1cs public/zk/pot12_final.ptau public/zk/circuit_0000.zkey
 npx snarkjs zkey contribute public/zk/circuit_0000.zkey public/zk/circuit_final.zkey --name="AutoCert Ceremony" -v
+npx snarkjs zkey verify public/zk/academic_verifier.r1cs public/zk/pot12_final.ptau public/zk/circuit_final.zkey
 npx snarkjs zkey export verificationkey public/zk/circuit_final.zkey public/zk/verification_key.json
 ```
 

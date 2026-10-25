@@ -23,7 +23,7 @@ In conventional academic credential verification, students are forced to furnish
 
 **AutoCert-ZKP** eliminates these barriers. It combines standard **W3C Verifiable Credentials (JSON-LD)** with **client-side Groth16 zero-knowledge succinct non-interactive arguments of knowledge (zk-SNARKs)** over the elliptic curve $BN128$.
 
-The student computes a zk-SNARK proof locally within an isolated browser WebAssembly worker in **sub-second latency**. The resulting static **~1.4 KB payload** (~384-byte Groth16 curve coordinates in Base64) is shared via a URL or QR code. Any recruiter or authority can verify the proof on edge infrastructure in **< 10 milliseconds** without accessing any private marks or personal data. Institutional authenticity is anchored to an immutable Merkle root ledger stored on Supabase PostgreSQL at **₹0 cloud compute cost**.
+The student computes a zk-SNARK proof locally within an isolated browser WebAssembly worker in **sub-second latency**. The resulting static **~1.4 KB payload** (~384-byte Groth16 curve coordinates in Base64) is shared via a URL or QR code. Any recruiter or authority can verify the proof on edge infrastructure in **< 10 milliseconds** without accessing any private marks or personal data. Institutional authenticity is anchored to a cryptographically signed Merkle root ledger stored on Supabase PostgreSQL at **₹0 cloud compute cost**.
 
 ---
 
@@ -48,7 +48,7 @@ flowchart TD
         F --> G["Commitment Leaf & Merkle Tree"]
     end
 
-    subgraph S2["Immutable Ledger Layer (Supabase PostgreSQL - ₹0 Gas)"]
+    subgraph S2["Storage Layer (Supabase PostgreSQL - Mutable Storage, ₹0 Gas)"]
         G --> H["Institutional Merkle Root & Batch Registry"]
         I["Cryptographic Revocation Registry"]
     end
@@ -80,6 +80,8 @@ flowchart TD
     class J,K,L,M,N prover;
     class O,P,Q,R verifier;
 ```
+
+> **Enforceable Tamper-Evidence Guarantee:** While Supabase PostgreSQL provides zero-cost persistence, it operates as mutable relational storage rather than an intrinsically immutable decentralized ledger. Tamper-evidence is therefore enforced cryptographically: relying parties and verifiers must validate registrar digital signatures on published Merkle roots, verify authority public keys, and account for root history, deletion, and replay attacks rather than blindly trusting database state.
 
 ---
 
@@ -132,7 +134,7 @@ flowchart LR
     class PROOF out;
 ```
 
-> **Mandatory Verifier Cutoff Enforcement:** The Circom circuit evaluates $\text{actualCgpaScaled} \ge \text{thresholdScaled}$. Because $\text{thresholdScaled}$ is an unforgeable public input ($x_0$), relying parties and verifiers (`/verify`) **must compare this public signal against their mandated minimum qualification cutoff** (e.g. verifying $\text{publicSignals}[0] \ge 750$ for a 7.50 cutoff). While a proof generated against a self-selected trivial threshold (e.g. 0.00 or 5.00) will verify mathematically, comparing the public signal against the verifier's required cutoff guarantees that weaker thresholds cannot establish eligibility.
+> **Mandatory Verifier Cutoff Enforcement:** The Circom circuit evaluates $\text{actualCgpaScaled} \ge \text{thresholdScaled}$. Because $\text{thresholdScaled}$ is a proof-bound public input ($x_0$, exposed as `publicSignals[0]`, distinct from `expectedCommitment` at `publicSignals[1]`), relying parties and verifiers (`/verify`) **must compare this public signal (`publicSignals[0]`) against their mandated minimum qualification cutoff** (e.g. verifying $\text{publicSignals}[0] \ge 750$ for a 7.50 cutoff). While a proof generated against a self-selected trivial threshold (e.g. 0.00 or 5.00) will verify mathematically, comparing the public signal against the verifier's required cutoff guarantees that weaker thresholds cannot establish eligibility.
 
 ---
 
@@ -220,7 +222,7 @@ Empirical profiling conducted on commodity hardware and projected mobile baselin
 | **Circuit Constraints**       | N/A                                  | N/A                               | **142 Gates (Poseidon Sponge Hash)**       |
 | **Network Payload Size**      | 2,516,582 bytes (~2.4 MB PDF)        | ~400 bytes                        | **1,480 bytes (~384 B curve points)**      |
 | **Bandwidth Reduction**       | Baseline (0%)                        | 99.98%                            | **99.94% reduction vs. PDF**               |
-| **PII Disclosed to Verifier** | 100.00% (Full Marks & PII exposed)   | Leaks wallet address              | **0.00% (Strict Data Minimization)**       |
+| **PII Disclosed to Verifier** | 100.00% (Full Marks & PII exposed)   | Leaks wallet address              | **No direct identifiers or marks disclosed** |
 | **Compute / Gas Fee**         | ~₹35.50 (Vendor OCR + Cloud fees)    | $2.00–$15.00 (Gas per tx)         | **₹0.00 (100% Free-Tier Architecture)**    |
 
 ---
@@ -242,7 +244,7 @@ Empirical profiling conducted on commodity hardware and projected mobile baselin
 
 ### `3. Public Verifier (/verify)`
 
-- **Cutoff Policy Enforcement:** Compares the public signal `thresholdScaled` against the relying party's mandatory qualification cutoff (e.g., verifying `thresholdScaled >= 750`), ensuring proofs generated against lower self-selected thresholds cannot be used to establish eligibility.
+- **Cutoff Policy Enforcement:** Compares the proof-bound public signal `thresholdScaled` (`publicSignals[0]`, distinct from `expectedCommitment` at `publicSignals[1]`) against the relying party's mandatory qualification cutoff (e.g., verifying `thresholdScaled >= 750`), ensuring proofs generated against lower self-selected thresholds cannot be used to establish eligibility.
 - **Sub-10ms Bilinear Pairings:** Decodes the Base64 token and evaluates three bilinear pairings on curve $BN128$ in under 10 milliseconds.
 - **Supabase Ledger Cross-Referencing:** Verifies that the public commitment exists in the accredited university Merkle root.
 - **Revocation Accumulator:** Instantly cross-checks against the cryptographic revocation registry.
