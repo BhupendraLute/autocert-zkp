@@ -13,7 +13,6 @@ import {
   ExternalLink,
   RotateCcw,
 } from 'lucide-react';
-import { executeLiveBrowserBenchmark } from '@/lib/zk/benchmark-runner';
 import { LiveBenchmarkProgress, LiveBenchmarkResult } from '@/lib/types/benchmark';
 import Link from 'next/link';
 
@@ -35,6 +34,7 @@ export function LiveBenchmarkCard() {
     });
 
     try {
+      const { executeLiveBrowserBenchmark } = await import('@/lib/zk/benchmark-runner');
       const benchmarkResult = await executeLiveBrowserBenchmark({
         thresholdScaled: 750,
         onProgress: (p) => setProgress(p),
@@ -283,3 +283,24 @@ export function LiveBenchmarkCard() {
     </div>
   );
 }
+
+export function LiveBenchmarkSkeleton() {
+  return (
+    <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 backdrop-blur-md relative overflow-hidden shadow-xl animate-pulse">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="space-y-2">
+          <div className="w-48 h-5 bg-slate-800/80 rounded-full" />
+          <div className="w-64 h-7 bg-slate-800 rounded-lg" />
+          <div className="w-80 h-4 bg-slate-800/60 rounded" />
+        </div>
+        <div className="w-40 h-11 bg-slate-800 rounded-xl" />
+      </div>
+      <div className="border border-dashed border-slate-800 rounded-xl p-8 text-center bg-slate-950/30">
+        <div className="w-10 h-10 bg-slate-800 rounded-full mx-auto mb-3" />
+        <div className="w-48 h-4 bg-slate-800 mx-auto rounded mb-2" />
+        <div className="w-72 h-3 bg-slate-800/60 mx-auto rounded" />
+      </div>
+    </div>
+  );
+}
+

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Award } from 'lucide-react';
-import { LiveBenchmarkCard } from './components/LiveBenchmarkCard';
+import { LiveBenchmarkCard, LiveBenchmarkSkeleton } from './components/LiveBenchmarkCard';
 import { BenchmarkMatrixTable } from './components/BenchmarkMatrixTable';
 import { ComparativeCharts } from './components/ComparativeCharts';
 import benchmarkResults from '../../../docs/benchmarks/benchmark-results.json';
@@ -11,6 +11,9 @@ export const metadata = {
   description:
     'Empirical performance profiling, live client-side WebAssembly proving benchmarks, and comparative metrics for AutoCert-ZKP.',
 };
+
+// Opt this segment out of instant navigation validation because it runs client-side WebAssembly & Groth16 benchmarks
+export const instant = false;
 
 export default function BenchmarksPage() {
   const desktopMean = benchmarkResults.provingMetrics.mean.toFixed(1);
@@ -44,7 +47,9 @@ export default function BenchmarksPage() {
 
         {/* Section 1: Live In-Browser Client Profiler */}
         <section aria-label="Live In-Browser Benchmark Profiler">
-          <LiveBenchmarkCard />
+          <Suspense fallback={<LiveBenchmarkSkeleton />}>
+            <LiveBenchmarkCard />
+          </Suspense>
         </section>
 
         {/* Section 2: Visual Comparative Analytics */}
