@@ -12,7 +12,8 @@
     "ledger:test": "tsx scripts/test-ledger.ts",
     "credential:test": "tsx scripts/test-credential-ingestion.ts",
     "prover:test": "tsx scripts/test-student-prover.ts",
-    "verifier:test": "tsx scripts/test-verifier.ts"
+    "verifier:test": "tsx scripts/test-verifier.ts",
+    "benchmark": "tsx scripts/benchmark.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.98",
