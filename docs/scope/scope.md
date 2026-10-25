@@ -17,7 +17,7 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 | 4 | OpenCode Zen AI Parser & W3C Credential Schema | Slice 1 | done |
 | 5 | Student Vault & Web Worker Prover | Slice 1 | done |
 | 6 | Public Verifier Portal & Sub-10ms Engine | Slice 2 | done |
-| 7 | Benchmarking Suite & Avishkar Deliverables | Slice 2 | planned |
+| 7 | Benchmarking Suite & Avishkar Deliverables | Slice 2 | in-progress |
 
 ---
 
@@ -103,15 +103,16 @@ Instant edge verification portal decoding Base64 Groth16 payloads, validating pa
 - [x] Test it: `/test verifier portal`
 code in `src/app/verify/`, `src/lib/zk/`, `src/lib/types/verifier.ts`, `src/lib/data/mock-proofs.ts`, `scripts/test-verifier.ts`
 
-### 7. Benchmarking Suite & Avishkar Deliverables · needs a decision
+### 7. Benchmarking Suite & Avishkar Deliverables · in-progress
 Automated empirical benchmarking across simulated device profiles and generation of Avishkar 2026-27 presentation artifacts (poster figures, tables, demo script).
 **Done when:** Quantitative benchmark table confirms $T_{proof} < 1.2s$, $T_{verify} < 10ms$, payload = 384B, and the live demonstration script runs flawlessly.
-- [ ] Design benchmark harness (spec): `/architect benchmark suite`
-- [ ] Build it: `/develop benchmark suite`
-   - [ ] Implement `scripts/benchmark.ts` measuring memory, proving time, and verification time
-   - [ ] Generate Avishkar presentation tables, comparison charts, and live demo script
+- [x] Design benchmark harness (spec): `/architect benchmark suite`
+- [x] Build it: `/develop benchmark suite`
+   - [x] Implement `scripts/benchmark.ts` measuring memory, proving time, and verification time
+   - [x] Generate Avishkar presentation tables, comparison charts, and live demo script
 - [ ] Verify benchmark metrics: `/check verify benchmark suite`
 - [ ] Test it: `/test benchmark suite`
+code in `scripts/benchmark.ts`, `docs/benchmarks/`, `docs/avishkar/`, `src/app/benchmarks/`, `src/lib/zk/benchmark-runner.ts`, `src/lib/types/benchmark.ts`
 
 ---
 

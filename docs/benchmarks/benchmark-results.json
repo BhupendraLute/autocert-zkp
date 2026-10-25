@@ -1,0 +1,104 @@
+{
+  "timestamp": 1792869234880,
+  "environment": {
+    "nodeVersion": "v24.18.0",
+    "os": "Windows_NT 10.0.26200 (x64)",
+    "arch": "x64",
+    "cpuModel": "11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz",
+    "cpuCores": 4,
+    "totalMemoryGb": 7.8
+  },
+  "provingMetrics": {
+    "mean": 219.99,
+    "stdDev": 12.55,
+    "median": 218.64,
+    "p95": 246.09,
+    "min": 198.42,
+    "max": 246.09,
+    "iterations": 10
+  },
+  "verificationMetrics": {
+    "mean": 19.02,
+    "stdDev": 5.51,
+    "median": 16.95,
+    "p95": 34.5,
+    "min": 14.13,
+    "max": 35.38,
+    "iterations": 25
+  },
+  "memoryMetrics": {
+    "initialHeapMb": 104.65,
+    "peakHeapMb": 104.65,
+    "deltaHeapMb": 0,
+    "peakRssMb": 342.39
+  },
+  "payloadMetrics": {
+    "rawProofJsonBytes": 726,
+    "base64TokenBytes": 1480,
+    "publicSignalsBytes": 87,
+    "traditionalPdfBytes": 2516582.4,
+    "bandwidthReductionPercent": 99.94
+  },
+  "deviceProfiles": [
+    {
+      "id": "low-end-mobile",
+      "name": "Low-End Smartphone (Projected)",
+      "chipset": "MediaTek Helio G85 (8-core @ 2.0GHz)",
+      "ram": "4 GB LPDDR4X",
+      "os": "Android 13 / Chrome Mobile",
+      "provingTimeMs": 1240,
+      "verificationTimeMs": 14.2,
+      "peakRamMb": 42.1,
+      "payloadBytes": 1480,
+      "piiExposurePercent": 0,
+      "cloudCostInr": 0,
+      "category": "low-end-mobile",
+      "notes": "Projected/modeled baseline for budget Indian smartphones; modeled proving in ~1.2s via WASM."
+    },
+    {
+      "id": "mid-tier-mobile",
+      "name": "Mid-Tier Smartphone (Projected)",
+      "chipset": "Qualcomm Snapdragon 778G (8-core @ 2.4GHz)",
+      "ram": "8 GB LPDDR5",
+      "os": "Android 14 / Chrome Mobile",
+      "provingTimeMs": 580,
+      "verificationTimeMs": 8.4,
+      "peakRamMb": 38.4,
+      "payloadBytes": 1480,
+      "piiExposurePercent": 0,
+      "cloudCostInr": 0,
+      "category": "mid-tier-mobile",
+      "notes": "Projected/modeled baseline for mid-range consumer smartphones; modeled sub-second proving."
+    },
+    {
+      "id": "desktop-client",
+      "name": "Desktop Client (11th)",
+      "chipset": "11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz",
+      "ram": "8 GB DDR4/DDR5",
+      "os": "Windows_NT x64",
+      "provingTimeMs": 219.99,
+      "verificationTimeMs": 19.02,
+      "peakRamMb": 342.39,
+      "payloadBytes": 1480,
+      "piiExposurePercent": 0,
+      "cloudCostInr": 0,
+      "category": "desktop",
+      "notes": "Empirically measured on current test runner host."
+    },
+    {
+      "id": "traditional-centralized",
+      "name": "Traditional Centralized Portal",
+      "chipset": "Enterprise Cloud Server (AWS/Azure)",
+      "ram": "32 GB Server RAM",
+      "os": "Linux Server / PDF OCR Engine",
+      "provingTimeMs": 0,
+      "verificationTimeMs": 2450,
+      "peakRamMb": 128,
+      "payloadBytes": 2516582,
+      "piiExposurePercent": 100,
+      "cloudCostInr": 35.5,
+      "category": "traditional-centralized",
+      "notes": "Legacy manual or cloud verification: leaks 100% PII, high latency, recurring gas/compute costs."
+    }
+  ]
+}
